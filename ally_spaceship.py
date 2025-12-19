@@ -14,7 +14,7 @@ class AllySpaceship(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         # Load and scale the image
-        self.image = pygame.image.load("Playerlvl1.png").convert_alpha()
+        self.image = pygame.image.load("assets/Playerlvl1.png").convert_alpha()
         self.rect = self.image.get_rect()
 
     def update(self):

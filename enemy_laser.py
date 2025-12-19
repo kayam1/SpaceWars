@@ -5,7 +5,7 @@ class EnemyLaser(pygame.sprite.Sprite):
     def __init__(self, pos_x, pos_y, damage, velocity):
         super().__init__()
 
-        self.image = pygame.image.load("EnemyLaser1.png").convert_alpha()
+        self.image = pygame.image.load("assets/EnemyLaser1.png").convert_alpha()
 
         self.rect = self.image.get_rect()
         self.velocity = velocity

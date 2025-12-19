@@ -21,9 +21,9 @@ class EnemySpaceship(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         if random.randint(0,100) <= 50:
-            self.image = pygame.image.load("RedEnemylvl1.png").convert_alpha()
+            self.image = pygame.image.load("assets/RedEnemylvl1.png").convert_alpha()
         else:
-            self.image = pygame.image.load("YellowEnemylvl1.png").convert_alpha()
+            self.image = pygame.image.load("assets/YellowEnemylvl1.png").convert_alpha()
 
         self.rect = self.image.get_rect()
         self.starting_posx = random.randint(0, SCREEN_WIDTH)
@@ -69,7 +69,6 @@ class EnemySpaceship(pygame.sprite.Sprite):
             if pygame.Rect.colliderect(self.rect, laser):
                 self.health -= laser.damage
                 laser.kill()
-                print(self.health)
                 if self.health <= 0:
                     self.kill()
 
