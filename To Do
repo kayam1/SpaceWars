@@ -1,0 +1,4 @@
+Add ally spaceship damage taken
+Make separate child classes of enemy spaceship
+Add contact damage to ally and enemy spaceships
+Fix spawn collision
