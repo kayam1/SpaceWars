@@ -5,7 +5,7 @@ from settings import *
 from enemy_laser import EnemyLaser
 
 class EnemySpaceship(pygame.sprite.Sprite):
-    velocity = 10
+    velocity = 20
     moving = True
     
     #Laser handling
@@ -28,7 +28,7 @@ class EnemySpaceship(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.starting_posx = random.randint(0, SCREEN_WIDTH)
         self.starting_posy = -10
-        self.center = (self.starting_posx, self.starting_posy)
+        self.rect.center = (self.starting_posx, self.starting_posy)
         self.ending_posx = random.randint(100 , 1720)
         self.ending_posy = random.randint(100, 300)
 

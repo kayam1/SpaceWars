@@ -10,6 +10,7 @@ class AllySpaceship(pygame.sprite.Sprite):
     laser_cooldown = 200  # Milliseconds between shots
     last_shot_time = 0  # When last laser was fired
     mouse_pos = (0,0)
+    health = 100
 
     def __init__(self):
         super().__init__()
@@ -38,6 +39,8 @@ class AllySpaceship(pygame.sprite.Sprite):
             self.rect.top = 0
         if self.rect.bottom > SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
+             
+        self.collision()
 
     def fire(self):
         left_laser = PlayerLaser(self.rect.centerx + self.laser_offset_left, self.rect.centery + self.laser_offset_top)
@@ -47,3 +50,11 @@ class AllySpaceship(pygame.sprite.Sprite):
 
     def set_mouse_pos(self, mouse_pos):
         self.mouse_pos = mouse_pos
+
+    def collision(self):
+        for laser in enemy_lasers:
+            if pygame.Rect.colliderect(self.rect, laser):
+                self.health -= laser.damage
+                laser.kill()
+                if self.health <= 0:
+                    self.kill()

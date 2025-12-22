@@ -48,7 +48,7 @@ while run:
 	current_time = pygame.time.get_ticks()
 	elapsed_time = (current_time - start_time) / 1000 # Convert to seconds
 	
-	if elapsed_time > (spawn_speed / 1000) * max_spawns + 0.1 and wave == 1: #and not enemy_spaceships:
+	if elapsed_time > (spawn_speed / 1000) * max_spawns + 0.1 and wave == 1 and not enemy_spaceships:
 		wave += 1
 		max_spawns = 5
 		spawn_speed = 1000
