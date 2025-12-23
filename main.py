@@ -7,10 +7,6 @@ from settings import *
 
 pygame.init()
 
-#Setting game window name and size 
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('MyGame')
-
 #Getting game start time 
 clock = pygame.time.Clock()
 start_time = pygame.time.get_ticks()

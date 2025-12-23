@@ -72,7 +72,4 @@ class EnemySpaceship(pygame.sprite.Sprite):
                 if self.health <= 0:
                     self.kill()
 
-
-
-       
-       
+    
