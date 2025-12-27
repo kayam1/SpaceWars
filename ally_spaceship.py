@@ -10,27 +10,15 @@ class AllySpaceship(pygame.sprite.Sprite):
     laser_cooldown = 200  # Milliseconds between shots
     last_shot_time = 0  # When last laser was fired
     mouse_pos = (0,0)
-    max_health = 100
-    current_health = max_health
-
+    
+    
     def __init__(self):
         super().__init__()
         # Load the image
         self.image = pygame.image.load("assets/Playerlvl1.png").convert_alpha()
         self.rect = self.image.get_rect()
-        self.healthbar_img = pygame.image.load("assets/HealthBar.png").convert_alpha()
-        self.healthbar_img_rect = self.healthbar_img.get_rect()
-        self.border_img = pygame.image.load("assets/HealthBarBorder.png").convert_alpha()
-        self.border_img_rect = self.healthbar_img.get_rect()
-        self.healthbar_img = pygame.transform.scale_by(self.healthbar_img, 0.5)
-        self.border_img = pygame.transform.scale_by(self.border_img, 0.5)
-        # If border is larger than health bar align them this way
-        self.healthbar_rect = self.healthbar_img.get_rect()
-        self.border_rect = self.border_img.get_rect()
-        center_pos = (screen_rect.centerx, 850)
-        self.healthbar_rect.center = center_pos
-        self.border_rect.center = center_pos
-
+        self.max_hp = 100
+        self.current_hp = self.max_hp
        
     def update(self):
         """Update spaceship position."""
@@ -53,11 +41,7 @@ class AllySpaceship(pygame.sprite.Sprite):
             self.rect.top = 0
         if self.rect.bottom > SCREEN_HEIGHT:
             self.rect.bottom = SCREEN_HEIGHT
-
-        # Draw border first (background)
-        screen.blit(self.border_img, self.border_rect)
-        # Draw health bar on top
-        screen.blit(self.healthbar_img, self.healthbar_rect)
+            
         self.collision()
 
 
@@ -73,13 +57,9 @@ class AllySpaceship(pygame.sprite.Sprite):
     def collision(self):
         for laser in enemy_lasers:
             if pygame.Rect.colliderect(self.rect, laser):
-                self.current_health -= laser.damage
-                self.healthBar()
+                self.current_hp -= laser.damage
                 laser.kill()
-                if self.current_health <= 0:
+                if self.current_hp <= 0:
                     self.kill()
 
-    def healthBar(self):
-        ratio = self.current_health / self.max_health * 100
-        print (ratio)
-        
+ 
