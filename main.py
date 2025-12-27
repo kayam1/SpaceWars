@@ -6,8 +6,6 @@ from healthbar import Healthbar
 from groups import *
 from settings import *
 
-
-
 def main():
 	pygame.init()
 

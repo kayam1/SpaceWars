@@ -1,5 +1,5 @@
 DONE : Add ally spaceship damage taken 
-Add health bar for ally spaceship
+DONE: Add health bar for ally spaceship
 Add ally laser beam attack on spacebar 
 Add different enemy attacks (triple shot and homing lasers)
 Make separate child classes of enemy spaceship
