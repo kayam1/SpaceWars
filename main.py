@@ -5,37 +5,36 @@ from enemy_spaceship import EnemySpaceship
 from healthbar import Healthbar
 from groups import *
 from settings import *
+from draw_menu import *
+from initialize_game import *
+from draw_gameover import *
+
 
 def main():
 	pygame.init()
-
 	#Getting game start time 
 	clock = pygame.time.Clock()
-	start_time = pygame.time.get_ticks()
 
 	#Loading Background image and resizing it 
-	BG = pygame.image.load(background_image_path)
-	BG = pygame.transform.scale(BG, (SCREEN_WIDTH, SCREEN_HEIGHT))
+	bg = pygame.image.load(background_image_path)
+	bg = pygame.transform.scale(bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
 
-	#Creating instance of Player1 and adding to groups 
-	player = AllySpaceship()
-	all_sprites.add(player)
-	ally_spaceships.add(player)
-
-	#Creating healthbar instance
-	player_healthbar = Healthbar(player.max_hp)
-
-	#setting for 1st wave of enemies 
-	max_spawns = 3
-	spawn_speed = 2000
-	wave = 1
-	# Setting up a custom event
-	SPAWN_EVENT = pygame.USEREVENT + 1
-	pygame.time.set_timer(SPAWN_EVENT, spawn_speed, max_spawns)  # Every 5000ms (5 seconds)
+	player, player_healthbar, start_time, wave, max_spawns, spawn_speed, SPAWN_EVENT = initialize_game()
 
 	run = True
+	game_active = False
+	restart_game = False
+
 	while run:
+
+		if not game_active:
+			should_start = draw_menu(bg)
+			if should_start:
+				game_active = True
 		
+		#Setting background image
+		screen.blit(bg, (0,0)) 
+
 		#Event handler
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -45,6 +44,7 @@ def main():
 				all_sprites.add(enemy)
 				enemy_spaceships.add(enemy)
 
+		
 		
 		# Calculating elapsed time
 		current_time = pygame.time.get_ticks()
@@ -57,9 +57,6 @@ def main():
 			pygame.time.set_timer(SPAWN_EVENT, spawn_speed, max_spawns)  # Every 5000ms (5 seconds)
 			start_time = current_time
 
-		#Setting background image
-		screen.blit(BG, (0,0)) 
-			
 		#Getting mouse position every frame
 		mouse_pos = pygame.mouse.get_pos()
 		player.set_mouse_pos(mouse_pos)
@@ -72,7 +69,13 @@ def main():
 		#Draw all
 		all_sprites.draw(screen)
 		player_healthbar.blitHealthbar()
-		
+
+		if not ally_spaceships:
+			restart_game = draw_gameover(bg)
+			if restart_game:
+				player, player_healthbar, start_time, wave, max_spawns, spawn_speed, SPAWN_EVENT = initialize_game()
+				
+			
 		#Managing fps (from setting file)
 		pygame.display.flip()
 		clock.tick(fps)

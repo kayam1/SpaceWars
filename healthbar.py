@@ -1,10 +1,8 @@
 import pygame
 from settings import *
-from groups import *
 
-class Healthbar(pygame.sprite.Sprite):
+class Healthbar():
     def __init__(self, max_hp):
-        super().__init__()
         self.healthbar_img = pygame.image.load("assets/healthbar1.png").convert_alpha()
         self.healthbar_img_rect = self.healthbar_img.get_rect()
         self.border_img = pygame.image.load("assets/hb_border1.png").convert_alpha()
@@ -35,13 +33,10 @@ class Healthbar(pygame.sprite.Sprite):
         
         if visible_width > 0:
             health_portion = pygame.Rect(0, 0, visible_width, self.height)
-            self.current_surface.blit(self.healthbar_img, (0, 0), health_portion)
-
-        
+            self.current_surface.blit(self.healthbar_img, (0, 0), health_portion)  
         
     def setCurrentHp(self, hp):
         self.current_hp = hp
-        print(self.current_hp)
 
     def blitHealthbar(self):
         screen.blit(self.border_img, self.border_rect)
