@@ -2,6 +2,7 @@ import pygame
 import sys
 from settings import *
 from button import Button
+from music_button import *
 
 def draw_menu(bg):
     # Load menu assets
@@ -10,19 +11,20 @@ def draw_menu(bg):
     quit_btn_img = pygame.image.load("assets/quit_button.png")
     
     # Scale images
-    logo_img = pygame.transform.scale_by(logo_img, 0.7) 
-    play_btn_img = pygame.transform.scale(play_btn_img, (200, 150))
-    quit_btn_img = pygame.transform.scale(quit_btn_img, (200, 150))
-    
+    logo_img = pygame.transform.scale_by(logo_img, 0.9) 
+    play_btn_img = pygame.transform.scale(play_btn_img, (150, 157))
+    quit_btn_img = pygame.transform.scale(quit_btn_img, (150, 157))
+
     # Calculate positions
     logo_pos = (SCREEN_WIDTH // 2 - logo_img.get_width() // 2, 150)
-    play_button = Button(SCREEN_WIDTH // 2 - 100, 400, play_btn_img)
-    quit_button = Button(SCREEN_WIDTH // 2 - 100, 600, quit_btn_img)
+    play_button = Button(SCREEN_WIDTH // 2 - 100, 500, play_btn_img)
+    quit_button = Button(SCREEN_WIDTH // 2 - 100, 700, quit_btn_img)
     
     menu = True
     while menu:
         # Draw background
         screen.blit(bg, (0, 0))
+        draw_music_button()
         
         # Draw logo
         screen.blit(logo_img, logo_pos)
@@ -36,7 +38,7 @@ def draw_menu(bg):
             # Quit button clicked - exit the game
             pygame.quit()
             sys.exit()
-        
+
         # Event handling
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

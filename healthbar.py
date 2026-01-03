@@ -3,9 +3,9 @@ from settings import *
 
 class Healthbar():
     def __init__(self, max_hp):
-        self.healthbar_img = pygame.image.load("assets/healthbar1.png").convert_alpha()
+        self.healthbar_img = pygame.image.load("assets/healthbar.png").convert_alpha()
         self.healthbar_img_rect = self.healthbar_img.get_rect()
-        self.border_img = pygame.image.load("assets/hb_border1.png").convert_alpha()
+        self.border_img = pygame.image.load("assets/hb_border.png").convert_alpha()
         self.border_img_rect = self.border_img.get_rect()
 
         self.width = self.healthbar_img.get_width()

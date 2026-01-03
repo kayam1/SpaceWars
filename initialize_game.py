@@ -21,12 +21,13 @@ def initialize_game():
     
     # Game state variables
     start_time = pygame.time.get_ticks()
-    wave = 1
+    MAX_WAVES = 1
+    current_wave = 1
     max_spawns = 3
-    spawn_speed = 2000
+    spawn_interval = 2000
     
     # Set up spawn event
     SPAWN_EVENT = pygame.USEREVENT + 1
-    pygame.time.set_timer(SPAWN_EVENT, spawn_speed, max_spawns)
+    pygame.time.set_timer(SPAWN_EVENT, spawn_interval, max_spawns)
     
-    return player, player_healthbar, start_time, wave, max_spawns, spawn_speed, SPAWN_EVENT
+    return player, player_healthbar, start_time, current_wave, max_spawns, spawn_interval, SPAWN_EVENT, MAX_WAVES

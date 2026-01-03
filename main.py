@@ -1,14 +1,12 @@
 import pygame
 import sys
-from ally_spaceship import AllySpaceship
 from enemy_spaceship import EnemySpaceship
-from healthbar import Healthbar
 from groups import *
 from settings import *
 from draw_menu import *
 from initialize_game import *
 from draw_gameover import *
-
+from music_button import draw_music_button
 
 def main():
 	pygame.init()
@@ -18,23 +16,30 @@ def main():
 	#Loading Background image and resizing it 
 	bg = pygame.image.load(background_image_path)
 	bg = pygame.transform.scale(bg, (SCREEN_WIDTH, SCREEN_HEIGHT))
+	
 
-	player, player_healthbar, start_time, wave, max_spawns, spawn_speed, SPAWN_EVENT = initialize_game()
+	player, player_healthbar, start_time, current_wave, max_spawns, spawn_interval, SPAWN_EVENT, MAX_WAVES = initialize_game()
 
 	run = True
 	game_active = False
 	restart_game = False
+	victory = False
 
 	while run:
 
 		if not game_active:
+			music = pygame.mixer.music.load("music_and_sfx/Ambitious Voyager.mp3")
+			pygame.mixer.music.play(-1)
+			pygame.mixer.music.set_volume(0.3)
 			should_start = draw_menu(bg)
 			if should_start:
 				game_active = True
+				
 		
 		#Setting background image
 		screen.blit(bg, (0,0)) 
-
+		draw_music_button()
+		
 		#Event handler
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
@@ -44,19 +49,20 @@ def main():
 				all_sprites.add(enemy)
 				enemy_spaceships.add(enemy)
 
-		
-		
-		# Calculating elapsed time
 		current_time = pygame.time.get_ticks()
-		elapsed_time = (current_time - start_time) / 1000 # Convert to seconds
-		
-		if elapsed_time > (spawn_speed / 1000) * max_spawns + 0.1 and wave == 1 and not enemy_spaceships:
-			wave += 1
-			max_spawns = 5
-			spawn_speed = 1000
-			pygame.time.set_timer(SPAWN_EVENT, spawn_speed, max_spawns)  # Every 5000ms (5 seconds)
-			start_time = current_time
+		elapsed_time = (current_time - start_time) / 1000
 
+		wave_complete = elapsed_time > (spawn_interval / 1000) * max_spawns + 0.1 and not enemy_spaceships and current_wave <= MAX_WAVES
+		if wave_complete:
+			if current_wave == MAX_WAVES:
+				victory = True
+			else:
+				current_wave += 1
+				max_spawns += 3
+				spawn_interval -= 300
+				pygame.time.set_timer(SPAWN_EVENT, spawn_interval, max_spawns)  
+				start_time = current_time  
+			
 		#Getting mouse position every frame
 		mouse_pos = pygame.mouse.get_pos()
 		player.set_mouse_pos(mouse_pos)
@@ -70,10 +76,13 @@ def main():
 		all_sprites.draw(screen)
 		player_healthbar.blitHealthbar()
 
-		if not ally_spaceships:
-			restart_game = draw_gameover(bg)
+		if not ally_spaceships or not enemy_spaceships and victory:
+			restart_game = draw_gameover(bg, victory)
 			if restart_game:
-				player, player_healthbar, start_time, wave, max_spawns, spawn_speed, SPAWN_EVENT = initialize_game()
+				player, player_healthbar, start_time, current_wave, max_spawns, spawn_speed, SPAWN_EVENT, MAX_WAVES = initialize_game()
+				music = pygame.mixer.music.load("music_and_sfx/Ambitious Voyager.mp3")
+				pygame.mixer.music.play(-1)
+				victory = False
 				
 			
 		#Managing fps (from setting file)

@@ -2,20 +2,29 @@ import pygame
 import sys
 from settings import *
 from button import Button
+from music_button import *
 
-def draw_gameover(bg):
+def draw_gameover(bg, victory):
     # Load menu assets
-    logo_img = pygame.image.load("assets/game_over.png")
+    if victory:
+        logo_img = pygame.image.load("assets/victory.png")
+        logo_img = pygame.transform.scale_by(logo_img, 0.7) 
+        victory_music = pygame.mixer.music.load("music_and_sfx/TWEL - AscendOutro.mp3")
+        pygame.mixer.music.play(0)
+    else:
+        logo_img = pygame.image.load("assets/game_over.png")
+        logo_img = pygame.transform.scale_by(logo_img, 0.5) 
+        gameover_music = pygame.mixer.music.load("music_and_sfx/Eerie Dreaming.mp3")
+        pygame.mixer.music.play(-1)
+
     replay_btn_img = pygame.image.load("assets/replay_button.png")
     quit_btn_img = pygame.image.load("assets/quit_button.png")
     
-    # Scale images
-    logo_img = pygame.transform.scale_by(logo_img, 0.5) 
-    replay_btn_img = pygame.transform.scale(replay_btn_img, (200, 150))
-    quit_btn_img = pygame.transform.scale(quit_btn_img, (200, 150))
+    replay_btn_img = pygame.transform.scale(replay_btn_img, (150, 157))
+    quit_btn_img = pygame.transform.scale(quit_btn_img, (150, 157))
     
     # Calculate positions
-    logo_pos = (SCREEN_WIDTH // 2 - logo_img.get_width() // 2, 50)
+    logo_pos = (SCREEN_WIDTH // 2 - logo_img.get_width() // 2, 100)
     replay_button = Button(SCREEN_WIDTH // 2 - 100, 500, replay_btn_img)
     quit_button = Button(SCREEN_WIDTH // 2 - 100, 700, quit_btn_img)
     
@@ -23,6 +32,7 @@ def draw_gameover(bg):
     while menu:
         # Draw background
         screen.blit(bg, (0, 0))
+        draw_music_button()
         
         # Draw logo
         screen.blit(logo_img, logo_pos)

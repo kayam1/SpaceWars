@@ -9,6 +9,7 @@ class Button:
         self.rect.topleft = (x, y)
         self.clicked = False
         self.hovered = False
+        self.last_mouse_state = False  # Track previous mouse state
         
     def draw(self, surface):
         # Check if mouse is hovering
@@ -17,13 +18,15 @@ class Button:
 
         action = False
         mouse_pos = pygame.mouse.get_pos()
+        current_mouse_pressed = pygame.mouse.get_pressed()[0]
 
+        # Check for mouse release (toggle on release)
         if self.rect.collidepoint(mouse_pos):
-            if pygame.mouse.get_pressed()[0] == 1 and not self.clicked:
-                self.clicked = True
+            if self.last_mouse_state and not current_mouse_pressed:  # Mouse was pressed, now released
                 action = True
-        
-        if pygame.mouse.get_pressed()[0] == 0:
-            self.clicked = False
+                self.clicked = not self.clicked  # Toggle state
             
+        # Update the last mouse state
+        self.last_mouse_state = current_mouse_pressed
+        
         return action
