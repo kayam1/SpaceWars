@@ -12,7 +12,7 @@ music_pressed_img = pygame.transform.scale(music_pressed_img, (40, 42))
 music_button = Button(SCREEN_WIDTH - 50, 10, music_btn_img)
 music_muted = False
 
-def draw_music_button():
+def music_button():
     global music_muted, music_button
     
     #Update button image based on mute state

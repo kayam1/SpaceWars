@@ -29,7 +29,7 @@ def draw_menu(bg):
         #Draw background
         screen.blit(bg, (0, 0))
         screen.blit(credits_img, (760, 800))
-        draw_music_button()
+        music_button()
         
         #Draw logo
         screen.blit(logo_img, logo_pos)

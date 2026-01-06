@@ -6,7 +6,7 @@ from settings import *
 from draw_menu import *
 from initialize_game import *
 from draw_gameover import *
-from music_button import draw_music_button
+from music_button import music_button
 
 def main():
 	pygame.init()
@@ -36,7 +36,7 @@ def main():
 				game_active = True	
 		#Background image
 		screen.blit(bg, (0,0)) 
-		draw_music_button()
+		music_button()
 
 		current_time = pygame.time.get_ticks()
 		elapsed_time = (current_time - start_time) / 1000

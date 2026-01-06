@@ -33,7 +33,7 @@ def draw_gameover(bg, victory):
     while menu:
         #Draw background
         screen.blit(bg, (0, 0))
-        draw_music_button()
+        music_button()
         
         #Draw logo
         screen.blit(logo_img, logo_pos)
