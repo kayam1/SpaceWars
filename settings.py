@@ -7,3 +7,7 @@ screen_rect = screen.get_rect()
 pygame.display.set_caption('MyGame')
 background_image_path = "assets/Game_Background.png"
 fps = 60
+ALLY_LASER_CHANNEL_ID = 0
+ALLY_DEATH_CHANNEL_ID = 1
+ENEMY_LASER_CHANNEL_ID = 2
+EMENY_DEATH_CHANNEL_ID = 3

@@ -4,29 +4,27 @@ from healthbar import Healthbar
 from groups import *
 
 def initialize_game():
-    """Initialize all game objects and variables for a fresh start"""
-    # Clear all sprite groups
+    #Clear all sprite groups
     all_sprites.empty()
     ally_spaceships.empty()
     enemy_spaceships.empty()
-    # Add any other groups you might have here
     
-    # Create player instance and add to groups
+    #Create player instance and add to groups
     player = AllySpaceship()
     all_sprites.add(player)
     ally_spaceships.add(player)
     
-    # Create healthbar instance
+    #Create healthbar instance
     player_healthbar = Healthbar(player.max_hp)
     
-    # Game state variables
+    #Wave management
     start_time = pygame.time.get_ticks()
-    MAX_WAVES = 1
+    MAX_WAVES = 2
     current_wave = 1
     max_spawns = 3
     spawn_interval = 2000
     
-    # Set up spawn event
+    #Set up 1st wave spawn event
     SPAWN_EVENT = pygame.USEREVENT + 1
     pygame.time.set_timer(SPAWN_EVENT, spawn_interval, max_spawns)
     

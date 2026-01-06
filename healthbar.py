@@ -13,7 +13,7 @@ class Healthbar():
 
         self.current_surface = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
 
-        #create rect for healthbar and border, center them horizontally and give them height value
+        #Create rect for healthbar and border, center them horizontally and give them height value
         self.hb_height = 900
         self.healthbar_rect = self.healthbar_img.get_rect()
         self.border_rect = self.border_img.get_rect()
@@ -28,7 +28,7 @@ class Healthbar():
         health_ratio = self.current_hp / self.max_hp
         visible_width = int(self.width * health_ratio)
         
-        # Clear the surface
+        #Clear the surface
         self.current_surface.fill((0, 0, 0, 0))
         
         if visible_width > 0:

@@ -32,19 +32,28 @@ class EnemySpaceship(pygame.sprite.Sprite):
         self.ending_posx = random.randint(100 , 1720)
         self.ending_posy = random.randint(100, 300)
 
+        #Load SFX
+        self.laser_sfx = pygame.mixer.Sound("music_and_sfx/laser2.wav")
+        self.laser_sfx.set_volume(0.2)
+        self.laser_sfx_channel = pygame.mixer.Channel(ENEMY_LASER_CHANNEL_ID)
+        self.death_sfx = pygame.mixer.Sound("music_and_sfx/enemy_death.wav")
+        self.death_sfx.set_volume(0.2)
+        self.death_sfx_channel = pygame.mixer.Channel(EMENY_DEATH_CHANNEL_ID)
+
+
     def update(self):
 
         dx = self.ending_posx - self.rect.centerx
         dy = self.ending_posy - self.rect.centery
         distance = (dx**2 + dy**2)**0.5
     
-        # If we're close enough, snap to target
+        #If we're close enough, snap to target
         if distance <= self.velocity:
             self.rect.centerx = self.ending_posx
             self.rect.centery = self.ending_posy
             self.moving = False
         else:
-            # Move toward target
+            #Move toward target
             self.rect.centerx += self.velocity * (dx / distance)
             self.rect.centery += self.velocity * (dy / distance)
 
@@ -63,6 +72,8 @@ class EnemySpaceship(pygame.sprite.Sprite):
         all_sprites.add(left_laser, right_laser)
         enemy_lasers.add(left_laser, right_laser)
 
+        #Play sfx
+        self.laser_sfx_channel.play(self.laser_sfx)
 
     def collision(self):
         for laser in ally_lasers:
@@ -71,5 +82,8 @@ class EnemySpaceship(pygame.sprite.Sprite):
                 laser.kill()
                 if self.health <= 0:
                     self.kill()
+                    self.death_sfx_channel.play(self.death_sfx)
+
+        
 
     
