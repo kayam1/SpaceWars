@@ -19,7 +19,7 @@ def initialize_game():
     
     #Wave management
     start_time = pygame.time.get_ticks()
-    MAX_WAVES = 2
+    MAX_WAVES = 3
     current_wave = 1
     max_spawns = 3
     spawn_interval = 2000

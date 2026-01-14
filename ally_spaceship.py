@@ -20,8 +20,10 @@ class AllySpaceship(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.max_hp = 100
         self.current_hp = self.max_hp
+        self.spaceship_damage = 10
         self.last_damage_time = 0
         self.damage_cooldown = 1000
+
 
         #Load SFX
         self.laser_sfx = pygame.mixer.Sound("music_and_sfx/laser1.wav")
@@ -77,11 +79,10 @@ class AllySpaceship(pygame.sprite.Sprite):
                     self.kill()
                     self.death_sfx_channel.play(self.death_sfx)
 
-        spaceship_damage = 10
         for spaceship in enemy_spaceships:
             if pygame.Rect.colliderect(self.rect, spaceship.rect):
                 if current_time - self.last_damage_time > self.damage_cooldown:
-                    self.current_hp -= spaceship_damage
+                    self.current_hp -= self.spaceship_damage
                     self.last_damage_time = current_time
                     if self.current_hp <= 0:
                         self.kill()

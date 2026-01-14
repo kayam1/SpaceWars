@@ -33,7 +33,7 @@ def draw_gameover(bg, victory):
     while menu:
         #Draw background
         screen.blit(bg, (0, 0))
-        music_button()
+        draw_music_button()
         
         #Draw logo
         screen.blit(logo_img, logo_pos)
@@ -51,6 +51,9 @@ def draw_gameover(bg, victory):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_m:  
+                    toggle_music()
         
         pygame.display.update()
     

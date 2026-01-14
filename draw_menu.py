@@ -26,10 +26,10 @@ def draw_menu(bg):
     
     menu = True
     while menu:
-        #Draw background
+        #Draw background 
         screen.blit(bg, (0, 0))
         screen.blit(credits_img, (760, 800))
-        music_button()
+        draw_music_button()
         
         #Draw logo
         screen.blit(logo_img, logo_pos)
@@ -47,7 +47,9 @@ def draw_menu(bg):
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-        
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_m:  
+                    toggle_music()
         pygame.display.update()
     
     return False  
