@@ -11,7 +11,6 @@ class AllySpaceship(pygame.sprite.Sprite):
     last_shot_time = 0  #When last laser was fired
     mouse_pos = (0,0)
     
-    
     def __init__(self):
         super().__init__()
 
