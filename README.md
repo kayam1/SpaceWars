@@ -1,3 +1,3 @@
 
 
-[click me to download]([ExeBuild/SpaceWars.exe](https://github.com/kayam1/SpaceWars/blob/master/ExeBuild/SpaceWars.exe))
+[SpaceWars Download](https://github.com/kayam1/SpaceWars/blob/8f8d2f197f0b50a5f238dcf2d94983e5b641460c/ExeBuild/SpaceWars.exe)
