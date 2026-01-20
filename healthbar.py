@@ -3,18 +3,20 @@ from settings import *
 
 class Healthbar():
     def __init__(self, max_hp):
-        self.healthbar_img = pygame.image.load("assets/healthbar.png").convert_alpha()
+        self.healthbar_img = pygame.image.load(resource_path("assets/healthbar.png")).convert_alpha()
+        self.border_img = pygame.image.load(resource_path("assets/hb_border.png")).convert_alpha()
+        
+        self.healthbar_img = resize_img(self.healthbar_img)
+        self.border_img = resize_img(self.border_img)
         self.healthbar_img_rect = self.healthbar_img.get_rect()
-        self.border_img = pygame.image.load("assets/hb_border.png").convert_alpha()
         self.border_img_rect = self.border_img.get_rect()
-
         self.width = self.healthbar_img.get_width()
         self.height = self.healthbar_img.get_height()
 
         self.current_surface = pygame.Surface((self.width, self.height), pygame.SRCALPHA)
 
         #Create rect for healthbar and border, center them horizontally and give them height value
-        self.hb_height = 900
+        self.hb_height = SCREEN_HEIGHT - SCREEN_HEIGHT*8/100
         self.healthbar_rect = self.healthbar_img.get_rect()
         self.border_rect = self.border_img.get_rect()
         center_pos = (screen_rect.centerx, self.hb_height)

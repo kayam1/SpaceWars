@@ -8,6 +8,12 @@ def initialize_game():
     all_sprites.empty()
     ally_spaceships.empty()
     enemy_spaceships.empty()
+    ally_lasers.empty()
+    enemy_lasers.empty()
+
+    #Game state
+    victory = False
+    wave_active = False
     
     #Create player instance and add to groups
     player = AllySpaceship()
@@ -18,14 +24,14 @@ def initialize_game():
     player_healthbar = Healthbar(player.max_hp)
     
     #Wave management
-    start_time = pygame.time.get_ticks()
+    wave_start_time = pygame.time.get_ticks()
     MAX_WAVES = 3
     current_wave = 1
-    max_spawns = 3
-    spawn_interval = 2000
+    max_spawns = 5
+    spawn_interval = 1500
     
     #Set up 1st wave spawn event
     SPAWN_EVENT = pygame.USEREVENT + 1
     pygame.time.set_timer(SPAWN_EVENT, spawn_interval, max_spawns)
     
-    return player, player_healthbar, start_time, current_wave, max_spawns, spawn_interval, SPAWN_EVENT, MAX_WAVES
+    return player, player_healthbar, wave_start_time, current_wave, max_spawns, spawn_interval, SPAWN_EVENT, MAX_WAVES, victory, wave_active

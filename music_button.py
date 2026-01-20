@@ -3,17 +3,17 @@ from settings import *
 from button import Button
 
 #Load images 
-music_btn_img = pygame.image.load("assets/music_button.png")
-music_pressed_img = pygame.image.load("assets/music_pressed.png")
-music_btn_img = pygame.transform.scale(music_btn_img, (40, 42))
-music_pressed_img = pygame.transform.scale(music_pressed_img, (40, 42))
+music_btn_img = pygame.image.load(resource_path("assets/music_button.png")).convert_alpha()
+music_pressed_img = pygame.image.load(resource_path("assets/music_pressed.png")).convert_alpha()
+music_btn_img = resize_img(music_btn_img)
+music_pressed_img = resize_img(music_pressed_img)
 
 #Create button 
-music_button = Button(SCREEN_WIDTH - 50, 10, music_btn_img)
+music_btn_pos = (SCREEN_WIDTH * 0.982 - music_btn_img.get_width() // 2, SCREEN_HEIGHT * 0.03 - music_btn_img.get_height() // 2)
 music_muted = False
+music_button = music_btn_img
 
 def toggle_music():
-    """Function to toggle mute state"""
     global music_muted, music_button
     
     # Toggle mute state
@@ -21,9 +21,9 @@ def toggle_music():
     
     # Update button image based on mute state
     if music_muted:   
-        music_button.image = music_pressed_img 
+        music_button = music_pressed_img 
     else:
-        music_button.image = music_btn_img
+        music_button = music_btn_img
     
     # Update volume
     if music_muted:
@@ -39,9 +39,11 @@ def toggle_music():
         pygame.mixer.Channel(EMENY_DEATH_CHANNEL_ID).set_volume(1)
         pygame.mixer.Channel(ALLY_DEATH_CHANNEL_ID).set_volume(1)
 
-def draw_music_button():    
-    if music_button.draw(screen):
-        toggle_music()
+    draw_music_button()
 
-    mute_text = font.render("press 'M' to mute", True, (255,255,255))
-    screen.blit(mute_text, (SCREEN_WIDTH - 210, 18))
+def draw_music_button():    
+    screen.blit(music_button, music_btn_pos)
+
+    mute_text = mute_font.render("press 'M' to mute", True, font_color)
+    mute_text_pos = (SCREEN_WIDTH * 0.92 - mute_text.get_width() // 2 , SCREEN_HEIGHT * 0.03 - mute_text.get_height() // 2)
+    screen.blit(mute_text, mute_text_pos)

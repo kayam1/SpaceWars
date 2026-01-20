@@ -3,37 +3,36 @@ import sys
 from settings import *
 from button import Button
 from music_button import *
+from mouse_cursor import *
 
 
 def draw_menu(bg):
     #Load menu assets
-    logo_img = pygame.image.load("assets/game_logo.png")
-    play_btn_img = pygame.image.load("assets/play_button.png")
-    quit_btn_img = pygame.image.load("assets/quit_button.png")
-    credits_img = pygame.image.load("assets/layer 2.png")
+    logo_img = pygame.image.load(resource_path("assets/game_logo.png")).convert_alpha()
+    play_btn_img = pygame.image.load(resource_path("assets/play_button.png")).convert_alpha()
+    quit_btn_img = pygame.image.load(resource_path("assets/quit_button.png")).convert_alpha()
+    credits_img = pygame.image.load(resource_path("assets/twel.png")).convert_alpha()
 
-    #Scale images
-    logo_img = pygame.transform.scale_by(logo_img, 0.9) 
-    play_btn_img = pygame.transform.scale(play_btn_img, (150, 157))
-    quit_btn_img = pygame.transform.scale(quit_btn_img, (150, 157))
-    credits_img = pygame.transform.scale(credits_img, (250, 100))
+    #Resize images
+    logo_img = resize_img(logo_img)
+    play_btn_img = resize_img(play_btn_img)
+    quit_btn_img = resize_img(quit_btn_img)
+    credits_img = resize_img(credits_img)
     
-
     #Calculate positions
-    logo_pos = (SCREEN_WIDTH // 2 - logo_img.get_width() // 2, 150)
-    play_button = Button(SCREEN_WIDTH // 2 - 100, 400, play_btn_img)
-    quit_button = Button(SCREEN_WIDTH // 2 - 100, 600, quit_btn_img)
+    logo_pos = (SCREEN_WIDTH * 0.5 - logo_img.get_width() // 2, SCREEN_HEIGHT * 0.25 - logo_img.get_height() // 2)
+    credits_pos = (SCREEN_WIDTH * 0.5 - credits_img.get_width() // 2, SCREEN_HEIGHT * 0.88 - credits_img.get_height() // 2)
+    play_button = Button(play_btn_img, 0.5, 0.5)
+    quit_button = Button(quit_btn_img, 0.5, 0.7)
     
     menu = True
     while menu:
-        #Draw background 
+        #Draw Menu
         screen.blit(bg, (0, 0))
-        screen.blit(credits_img, (760, 800))
-        draw_music_button()
-        
-        #Draw logo
         screen.blit(logo_img, logo_pos)
-        
+        screen.blit(credits_img, credits_pos)
+        draw_music_button()
+    
         #Draw buttons
         if play_button.draw(screen):
             return True  
@@ -50,6 +49,8 @@ def draw_menu(bg):
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_m:  
                     toggle_music()
+
+        draw_mouse_cursor() #draw last to be on top of everything
         pygame.display.update()
     
     return False  

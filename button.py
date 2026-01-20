@@ -1,12 +1,13 @@
 import pygame
+from settings import *
 
 class Button:
-    def __init__(self, x, y, image, scale=1):
+    def __init__(self, image, x, y):
+        self.image = image
         width = image.get_width()
         height = image.get_height()
-        self.image = pygame.transform.scale(image, (int(width * scale), int(height * scale)))
         self.rect = self.image.get_rect()
-        self.rect.topleft = (x, y)
+        self.rect.topleft = (SCREEN_WIDTH * x - width // 2, SCREEN_HEIGHT * y - height // 2)
         self.clicked = False
         self.hovered = False
         self.last_mouse_state = False  # Track previous mouse state
