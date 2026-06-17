@@ -3,7 +3,7 @@
 
 A classic arcade-style spaceship shooter with pixel art graphics. Control your ship, defeat waves of enemies, and survive as long as possible.
 
-##Gameplay
+## Gameplay
 
 ### Objective
 
