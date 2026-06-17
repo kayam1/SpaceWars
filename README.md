@@ -2,9 +2,10 @@
 # Overview
 
 A classic arcade-style spaceship shooter with pixel art graphics. Control your ship, defeat waves of enemies, and survive as long as possible.
-Gameplay
 
-## Objective
+##Gameplay
+
+### Objective
 
     Destroy enemy ships to earn points
 
@@ -13,7 +14,7 @@ Gameplay
     Achieve the highest score
 
 
-## Player
+### Player
 
     Health: 100 HP
 
@@ -23,7 +24,7 @@ Gameplay
 
     Invincibility frames after taking damage
 
-## Enemies
+### Enemies
 
     Spawn from the top of screen
 
