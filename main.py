@@ -2,13 +2,13 @@ import pygame
 pygame.init()
 
 import sys
-from enemy_spaceship import EnemySpaceship
-from groups import *
-from settings import *
-from draw_menu import *
-from initialize_game import *
-from draw_gameover import *
-from music_button import draw_music_button
+from src.enemy_spaceship import EnemySpaceship
+from src.groups import *
+from src.settings import *
+from src.draw_menu import *
+from src.initialize_game import *
+from src.draw_gameover import *
+from src.music_button import draw_music_button
  
 def main():
 	#Game start time 
