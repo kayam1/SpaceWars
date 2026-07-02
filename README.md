@@ -7,32 +7,32 @@ A classic arcade-style spaceship shooter with pixel art graphics. Control your s
 
 ### Objective
 
-    Destroy enemy ships to earn points
+* Destroy enemy ships to earn points
 
-    Survive as long as possible
+* Survive as long as possible
 
-    Achieve the highest score
+* Achieve the highest score
 
 
 ### Player
 
-    Health: 100 HP
+* Health: 100 HP
 
-    Movement: follows the mouse cursor
+* Movement: follows the mouse cursor
 
-    Firing: Continuous laser shots
+* Firing: Continuous laser shots
 
-    Invincibility frames after taking damage
+* Invincibility frames after taking damage
 
 ### Enemies
 
-    Spawn from the top of screen
+* Spawn from the top of screen
 
-    Move downward
+* Move downward
 
-    Shoot lasers at the player
+* Shoot lasers at the player
 
-    Enemies get stronger with each passing wave
+* Enemies get stronger with each passing wave
 
 ## Installation
 
