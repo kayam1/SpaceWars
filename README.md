@@ -40,15 +40,11 @@ A classic arcade-style spaceship shooter with pixel art graphics. Control your s
 
 ## Key Features
 
-> 🎮 Responsive controls - Smooth ship movement
-
-> 💥 Combat system - Lasers, health, damage
-
-> 📊 Health bar - Visual player health indicator
-
-> 🎨 Pixel art - Retro-style graphics
-
-> 🔊 Sound effects - Lasers, explosions, impacts
+  🎮 Responsive controls - Smooth ship movement
+  💥 Combat system - Lasers, health, damage
+  📊 Health bar - Visual player health indicator
+  🎨 Pixel art - Retro-style graphics
+  🔊 Sound effects - Lasers, explosions, impacts
 
 ## Credits
 
