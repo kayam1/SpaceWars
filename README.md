@@ -50,4 +50,4 @@ A classic arcade-style spaceship shooter with pixel art graphics. Control your s
 
 TWEL - All background music and SFX 
 
-###Game created with Pygame. Assets are AI generated and edited with photoshop
+### Game created with Pygame. Assets are AI generated and edited with photoshop
